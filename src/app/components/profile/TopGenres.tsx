@@ -1,6 +1,12 @@
-type Props = {
-  genres: string[]
+type Genre = {
+  name: string
+  value: number
 }
+
+type Props = {
+  genres: Genre[]
+}
+
 
 export function TopGenres({ genres }: Props) {
   return (

@@ -2,9 +2,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { MusicDataProvider } from './context/MusicDataContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { LandingPage } from './components/LandingPage';
-import { ProfilePage } from './components/ProfilePage';
-import { AnalyticsPage } from './components/AnalyticsPage';
+import { LandingPage } from './pages/LandingPage'
+import { ProfilePage } from './pages/ProfilePage'
+import { AnalyticsPage } from './pages/AnalyticsPage'
+
 
 export default function App() {
   return (

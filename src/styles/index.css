@@ -30,3 +30,10 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #3F3F46;
 }
+.rdp,
+.rdp * {
+  transition-property: none !important;
+  transition-duration: 0ms !important;
+  animation: none !important;
+  will-change: auto !important;
+}

@@ -192,3 +192,19 @@
     line-height: 1.5;
   }
 }
+.rdp,
+.rdp * {
+  transition-property: none !important;
+  transition-duration: 0ms !important;
+  animation: none !important;
+  will-change: auto !important;
+}
+/* === Disable focus painting lag in dark theme === */
+html.dark button,
+html.dark input,
+html.dark select,
+html.dark textarea,
+html.dark .rdp button {
+  outline: none !important;
+  box-shadow: none !important;
+}
