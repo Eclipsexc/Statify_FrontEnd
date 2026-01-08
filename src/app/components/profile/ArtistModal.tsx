@@ -1,17 +1,6 @@
 import { motion } from 'framer-motion'
 import { X } from 'lucide-react'
-
-type Artist = {
-  id: string | number
-  name: string
-  image: string
-  plays: number
-  followers?: number
-  totalMinutes?: number
-  firstStreamedAt?: string
-  lastStreamedAt?: string
-  popularity?: number
-}
+import type { Artist } from '../../context/MusicDataContext'
 
 type Props = {
   artist: Artist
@@ -55,42 +44,42 @@ export function ArtistModal({ artist, onClose }: Props) {
             </h2>
 
             <p className="text-sm text-[#1DB954] mb-4">
-              {(artist.followers ?? 0).toLocaleString()} followers
+              {artist.followers.toLocaleString()} followers
             </p>
 
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
                 <p className="text-muted-foreground">Total streams</p>
                 <p className="font-semibold">
-                  {artist.plays ?? '—'}×
+                  {artist.plays}×
                 </p>
               </div>
 
               <div>
                 <p className="text-muted-foreground">Total minutes</p>
                 <p className="font-semibold">
-                  {artist.totalMinutes ?? '—'}m
+                  {artist.totalMinutes}m
                 </p>
               </div>
 
               <div>
                 <p className="text-muted-foreground">First streamed</p>
                 <p className="font-semibold">
-                  {artist.firstStreamedAt ?? '—'}
+                  {artist.firstStreamedAt}
                 </p>
               </div>
 
               <div>
                 <p className="text-muted-foreground">Last streamed</p>
                 <p className="font-semibold">
-                  {artist.lastStreamedAt ?? '—'}
+                  {artist.lastStreamedAt}
                 </p>
               </div>
 
               <div>
                 <p className="text-muted-foreground">Popularity</p>
                 <p className="font-semibold">
-                  {artist.popularity ?? '—'}/10
+                  {artist.popularity}/10
                 </p>
               </div>
             </div>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Search, Sun, Moon, User } from 'lucide-react'
+import { Sun, Moon, User, Map } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 export function Header() {
@@ -33,29 +33,13 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-full bg-[#1DB954] flex items-center justify-center">
-            <span className="text-white font-bold">S</span>
+          <div className="h-10 w-10 rounded-full bg-[#1DB954] flex items-center justify-center">
+            <span className="text-white font-bold text-lg">S</span>
           </div>
           <span className="font-bold text-lg">Statify</span>
         </Link>
 
-        {/* Search */}
-        <div className="hidden md:block flex-1 max-w-md mx-8">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-            <input
-              placeholder="Search tracks / artists"
-              className="
-                w-full rounded-full px-10 py-2 text-sm outline-none
-                bg-gray-100 text-black
-                focus:ring-2 focus:ring-[#1DB954]
-                dark:bg-white/10 dark:text-white
-              "
-            />
-          </div>
-        </div>
-
-        {/* Right */}
+        {/* Right controls */}
         <div className="flex items-center gap-3">
           <button
             onClick={toggleTheme}
@@ -69,10 +53,24 @@ export function Header() {
           </button>
 
           <Link
+            to="/map"
+            className="
+              flex items-center gap-2
+              rounded-full px-4 py-2 text-sm font-medium
+              bg-black/5 hover:bg-black/10
+              dark:bg-white/10 dark:hover:bg-white/20
+              transition-colors
+            "
+          >
+            <Map className="h-4 w-4" />
+            <span className="hidden sm:block">Map</span>
+          </Link>
+
+          <Link
             to="/profile"
             className="rounded-full p-2 hover:bg-black/10 dark:hover:bg-white/10"
           >
-            <div className="h-8 w-8 rounded-full bg-[#1DB954] flex items-center justify-center">
+            <div className="h-10 w-10 rounded-full bg-[#1DB954] flex items-center justify-center">
               <User className="h-5 w-5 text-white" />
             </div>
           </Link>

@@ -1,12 +1,12 @@
-import { Github } from 'lucide-react';
+import { Github } from 'lucide-react'
 
 export function Footer() {
   return (
     <footer className="border-t border-border bg-background mt-auto">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="container mx-auto px-4 py-8 space-y-6">
+        <div className="flex flex-col md:flex-row justify-between gap-8">
           {/* About */}
-          <div>
+          <div className="max-w-md">
             <h3 className="font-semibold mb-3">Statify</h3>
             <p className="text-sm text-muted-foreground">
               Discover your music listening patterns with beautiful analytics and insights. Track your favorite artists, songs, and genres.
@@ -31,15 +31,13 @@ export function Footer() {
               </li>
             </ul>
           </div>
+        </div>
 
-          {/* Copyright */}
-          <div className="flex items-end">
-            <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Statify. All rights reserved.
-            </p>
-          </div>
+        {/* Copyright */}
+        <div className="text-center text-sm text-muted-foreground pt-4 border-t border-border">
+          © {new Date().getFullYear()} Statify. All rights reserved.
         </div>
       </div>
     </footer>
-  );
+  )
 }

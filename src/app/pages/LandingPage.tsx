@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { ChartBar, TrendingUp, Music } from 'lucide-react'
-import { motion } from 'motion/react'
+import { motion } from 'framer-motion'
 
 import bgVideo from '../video/spotify_adv.mp4'
 
@@ -58,27 +58,23 @@ export function LandingPage() {
               text-gray-900 dark:text-white
             "
           >
-            {/* Icons */}
             <div className="flex gap-4 mb-6">
               <ChartBar className="h-6 w-6 text-[#1DB954]" />
               <Music className="h-6 w-6 text-[#1DB954]" />
               <TrendingUp className="h-6 w-6 text-[#1DB954]" />
             </div>
 
-            {/* Title */}
             <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
               Your music. <br />
               <span className="text-[#1DB954]">Your stats.</span> <br />
               Your story.
             </h1>
 
-            {/* Subtitle */}
             <p className="mb-8 text-gray-700 dark:text-gray-300">
               Discover deep insights into your music listening habits. Track your
               favorite artists, songs, and genres with beautiful visualizations.
             </p>
 
-            {/* CTA */}
             <button
               onClick={() => navigate('/profile')}
               className="
@@ -95,7 +91,6 @@ export function LandingPage() {
               Go to Profile
             </button>
 
-            {/* Secondary action */}
             <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 text-center">
               or{' '}
               <button
@@ -109,7 +104,6 @@ export function LandingPage() {
         </div>
       </div>
 
-      {/* Bottom fade (for footer merge) */}
       <div
         className="
           absolute bottom-0 left-0 right-0 h-16 z-10

@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { MusicDataProvider } from './context/MusicDataContext'
-import { Header } from './components/Header'
-import { Footer } from './components/Footer'
+import { Header } from './components/ui/Header'
+import { Footer } from './components/ui/Footer'
 import { LandingPage } from './pages/LandingPage'
 import { ProfilePage } from './pages/ProfilePage'
 import { AnalyticsPage } from './pages/AnalyticsPage'
-import ListeningMap from './components/analytics/ListeningMap'
+import ListeningMap from './pages/ListeningMap'
+import ProfileNoData from './pages/ProfileNoData'
 
 export default function App() {
   return (
@@ -17,8 +18,9 @@ export default function App() {
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/profile/empty" element={<ProfileNoData />} />
               <Route path="/analytics" element={<AnalyticsPage />} />
-              <Route path="/__test-map" element={<ListeningMap />} />
+              <Route path="/map" element={<ListeningMap />} />
             </Routes>
           </main>
           <Footer />

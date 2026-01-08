@@ -1,16 +1,16 @@
+'use client'
+
 import { useState, useRef, useEffect } from 'react'
 import { CalendarIcon } from 'lucide-react'
-
 import { Calendar } from '../ui/calendar'
 import { Input } from '../ui/input'
-import { Label } from '../ui/label'
 
-function formatDate(date: Date | undefined) {
+function formatDate(date?: Date) {
   if (!date) return ''
   return date.toLocaleDateString('en-US', {
     day: '2-digit',
-    month: 'long',
-    year: 'numeric',
+    month: 'short',
+    year: 'numeric'
   })
 }
 
@@ -21,7 +21,6 @@ type Props = {
 export function DateRangePicker({ onChange }: Props) {
   const [from, setFrom] = useState<Date | undefined>()
   const [to, setTo] = useState<Date | undefined>()
-
   const [open, setOpen] = useState<'from' | 'to' | null>(null)
 
   const wrapperRef = useRef<HTMLDivElement | null>(null)
@@ -30,11 +29,7 @@ export function DateRangePicker({ onChange }: Props) {
   useEffect(() => {
     if (!open) return
 
-    function onKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape') setOpen(null)
-    }
-
-    function onClickOutside(e: MouseEvent) {
+    function handleClickOutside(e: MouseEvent) {
       if (
         calendarRef.current &&
         !calendarRef.current.contains(e.target as Node) &&
@@ -45,83 +40,67 @@ export function DateRangePicker({ onChange }: Props) {
       }
     }
 
-    window.addEventListener('keydown', onKeyDown)
-    window.addEventListener('mousedown', onClickOutside)
-
-    return () => {
-      window.removeEventListener('keydown', onKeyDown)
-      window.removeEventListener('mousedown', onClickOutside)
-    }
+    window.addEventListener('mousedown', handleClickOutside)
+    return () => window.removeEventListener('mousedown', handleClickOutside)
   }, [open])
 
-  function handleSelect(d: Date | undefined) {
-    if (!d || !open) return
+  function handleSelect(date?: Date) {
+    if (!date || !open) return
 
     if (open === 'from') {
-      setFrom(d)
-      onChange?.({ from: d, to })
-    }
-
-    if (open === 'to') {
-      setTo(d)
-      onChange?.({ from, to: d })
+      setFrom(date)
+      onChange?.({ from: date, to })
+    } else {
+      setTo(date)
+      onChange?.({ from, to: date })
     }
   }
 
   return (
-    <div ref={wrapperRef} className="relative">
-      <p className="text-xs text-muted-foreground mb-1">
-        Analyze period
-      </p>
-
-      <div className="flex gap-2">
-        <div className="relative w-full">
-          <Label className="sr-only">From</Label>
-
-          <div
-            className="relative cursor-pointer"
-            onClick={() => setOpen(open === 'from' ? null : 'from')}
-          >
-            <Input
-              value={formatDate(from)}
-              placeholder="From"
-              readOnly
-              className="cursor-pointer pr-9"
-            />
-            <CalendarIcon className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          </div>
-        </div>
-
-        <div className="relative w-full">
-          <Label className="sr-only">To</Label>
-
-          <div
-            className="relative cursor-pointer"
-            onClick={() => setOpen(open === 'to' ? null : 'to')}
-          >
-            <Input
-              value={formatDate(to)}
-              placeholder="To"
-              readOnly
-              className="cursor-pointer pr-9"
-            />
-            <CalendarIcon className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          </div>
-        </div>
+    <div ref={wrapperRef} className="relative w-full max-w-[360px] sm:max-w-none">
+      {/* LABEL */}
+      <div className="mb-1">
+        <span className="text-[13px] font-semibold tracking-wide text-zinc-800 dark:text-zinc-200">
+          Analyze period
+        </span>
       </div>
 
+      {/* INPUTS */}
+      <div className="flex flex-col sm:flex-row gap-2">
+        {(['from', 'to'] as const).map(type => (
+          <div
+            key={type}
+            className="relative w-full sm:w-[170px] cursor-pointer"
+            onClick={() => setOpen(open === type ? null : type)}
+          >
+            <Input
+              readOnly
+              placeholder={type === 'from' ? 'From' : 'To'}
+              value={formatDate(type === 'from' ? from : to)}
+              className="
+                pr-9
+                bg-white dark:bg-zinc-900
+                border border-zinc-300 dark:border-zinc-700
+                shadow-sm
+                hover:border-zinc-400 dark:hover:border-zinc-500
+                focus-visible:ring-1 focus-visible:ring-[#1DB954]
+                transition-colors
+              "
+            />
+            <CalendarIcon className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
+          </div>
+        ))}
+      </div>
+
+      {/* CALENDAR */}
       {open && (
         <div
           ref={calendarRef}
           className="
-            absolute
-            left-0
-            mt-2
-            z-50
-            bg-popover
-            border
-            border-border
+            absolute z-50 mt-2
             rounded-xl
+            border border-zinc-200 dark:border-zinc-700
+            bg-white dark:bg-zinc-900
             shadow-xl
             p-3
           "
@@ -129,10 +108,10 @@ export function DateRangePicker({ onChange }: Props) {
           <Calendar
             mode="single"
             selected={open === 'from' ? from : to}
+            onSelect={handleSelect}
             captionLayout="dropdown"
             fromYear={2015}
             toYear={2030}
-            onSelect={handleSelect}
           />
         </div>
       )}

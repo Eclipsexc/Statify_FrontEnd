@@ -2,18 +2,7 @@ import { useState } from 'react'
 import { ChevronUp, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArtistModal } from './ArtistModal'
-
-type Artist = {
-  id: string | number
-  name: string
-  image: string
-  plays: number
-  followers: number
-  totalMinutes: number
-  firstStreamedAt: string
-  lastStreamedAt: string
-  popularity: number
-}
+import type { Artist } from '../../context/MusicDataContext'
 
 type Props = {
   artists: Artist[]
@@ -79,11 +68,9 @@ export function TopArtists({ artists }: Props) {
                 onClick={() => setActiveArtist(a)}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.18, ease: 'easeOut' }}
-                className="relative p-6 rounded-xl bg-card text-center cursor-pointer
-                  hover:shadow-lg"
+                className="relative p-6 rounded-xl bg-card text-center cursor-pointer hover:shadow-lg"
               >
-                <div className="absolute top-3 left-3 text-xs font-semibold px-2 py-1 rounded-md
-                  bg-[#1DB954] text-white">
+                <div className="absolute top-3 left-3 text-xs font-semibold px-2 py-1 rounded-md bg-[#1DB954] text-white">
                   #{rank}
                 </div>
 

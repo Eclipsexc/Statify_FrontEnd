@@ -1,11 +1,5 @@
 import { motion } from 'framer-motion'
-
-type Track = {
-  id: string | number
-  cover: string
-  name: string
-  artist: string
-}
+import type { Track } from './TopTracks'
 
 type Props = {
   tracks: Track[]

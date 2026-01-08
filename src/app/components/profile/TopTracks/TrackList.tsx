@@ -1,16 +1,9 @@
 import { motion } from 'framer-motion'
-
-type Track = {
-  id: string | number
-  cover: string
-  name: string
-  artist: string
-  plays: number
-}
+import type { Track } from './TopTracks' 
 
 type Props = {
   tracks: Track[]
-  containerRef: React.RefObject<HTMLDivElement>
+  containerRef: React.RefObject<HTMLDivElement | null>
   onScroll: () => void
   onSelect: (track: Track) => void
 }
